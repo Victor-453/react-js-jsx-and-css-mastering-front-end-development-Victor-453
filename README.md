@@ -1,70 +1,64 @@
-# React.js and Tailwind CSS Assignment
+# MovieFlix (React + Vite + Tailwind)
 
-This assignment focuses on building a responsive React application using JSX and Tailwind CSS, implementing component architecture, state management, hooks, and API integration.
+Single-page application for browsing movies & TV series using the [TMDB API](https://www.themoviedb.org/). Built with React, React Router, Tailwind CSS, and Vite.
 
-## Assignment Overview
-
-You will:
-1. Set up a React project with Vite and Tailwind CSS
-2. Create reusable UI components
-3. Implement state management using React hooks
-4. Integrate with external APIs
-5. Style your application using Tailwind CSS
+## Features
+* Popular Movies & TV lists with pagination
+* Search (debounced) across movies & TV (multi search)
+* Detail pages (movie / TV) with cast & similar titles
+* Favorites stored in `localStorage` (persist between sessions)
+* Light/Dark theme toggle (persisted)
+* Reusable component library (cards, grid, pagination, loader, error box, badges)
+* Simple in-memory request caching for repeated API calls
+* Accessible alt text & aria labels
 
 ## Getting Started
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Start the development server:
-   ```
-   npm run dev
-   ```
+Create a `.env` file (NOT committed) and add your TMDB key:
 
-## Files Included
+```
+VITE_TMDB_API_KEY=your_tmdb_api_key_here
+```
 
-- `Week3-Assignment.md`: Detailed assignment instructions
-- Starter files for your React application:
-  - Basic project structure
-  - Pre-configured Tailwind CSS
-  - Sample component templates
+Install dependencies and run dev server:
 
-## Requirements
+```
+npm install
+npm run dev
+```
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Modern web browser
-- Code editor (VS Code recommended)
+Open the local URL printed in the terminal.
 
 ## Project Structure
-
 ```
 src/
-├── components/       # Reusable UI components
-├── pages/           # Page components
-├── hooks/           # Custom React hooks
-├── context/         # React context providers
-├── api/             # API integration functions
-├── utils/           # Utility functions
-└── App.jsx          # Main application component
+	api/          // tmdb.js - low level API calls
+	components/   // Reusable UI pieces
+	context/      // ThemeContext
+	hooks/        // useFetch, useLocalFavorites
+	pages/        // Route pages
 ```
 
-## Submission
+## Environment Variables
+The API key is accessed via `import.meta.env.VITE_TMDB_API_KEY`. Never hardcode it; keep it only in `.env`.
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+If you see errors like `TMDB API key missing` or empty data results, double-check:
+1. The `.env` file exists at the project root.
+2. The variable name is exactly `VITE_TMDB_API_KEY`.
+3. You restarted the dev server after creating/updating `.env`.
+4. Your key is active (try it in a raw request: `curl "https://api.themoviedb.org/3/movie/popular?api_key=YOUR_KEY&language=en-US"`).
 
-1. Complete all required components and features
-2. Implement proper state management with hooks
-3. Integrate with at least one external API
-4. Style your application with Tailwind CSS
-5. Deploy your application and add the URL to your README.md
+## Scripts
+* `npm run dev` – start Vite dev server
+* `npm run build` – production build
+* `npm run preview` – preview production build
 
-## Resources
+## Notes
+This is a learning/demo project. For production you may want:
+* Server-side rendering or hydration strategy
+* More robust state management / caching (React Query, SWR, etc.)
+* Better image placeholders / skeleton loaders
+* Unit tests (Vitest / Testing Library)
 
-- [React Documentation](https://react.dev/)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Vite Documentation](https://vitejs.dev/guide/)
-- [React Router Documentation](https://reactrouter.com/) 
+## License
+MIT (feel free to adapt).
